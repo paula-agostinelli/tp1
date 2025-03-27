@@ -13,6 +13,9 @@ public class Concurso {
     private Map<Participante, LocalDate> inscripciones; // Mapea cada participante con su fecha de inscripción
 
     public Concurso(LocalDate fechaInicio, LocalDate fechaFin) {
+        if (fechaInicio.isAfter(fechaFin)) {
+            throw new IllegalArgumentException("La fecha de inicio no puede ser posterior a la fecha de fin.");
+        }
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.participantes = new ArrayList<>();
@@ -21,31 +24,41 @@ public class Concurso {
 
 
     public void inscribir(Participante p) {
+        LocalDate fechaInscripcion = LocalDate.now();
+        if (fechaInscripcion.isBefore(fechaInicio) || fechaInscripcion.isAfter(fechaFin)) {
+            throw new IllegalStateException("Inscripción fuera del rango permitido.");
+        }
+
         if (!participantes.contains(p)) {
             this.participantes.add(p);
             this.inscripciones.put(p, LocalDate.now());
+            if (fechaInscripcion.isEqual(fechaInicio)) {
+                p.sumarPuntos(10);
+            }
         }
 
     }
 
-    public boolean estaIncripto(Participante p) {
+    /*public boolean estaIncripto(Participante p) {
+
         return this.participantes.contains(p);
-    }
+    }*/
 
     public LocalDate obtenerFechaIncripcion(Participante p) {
 
         return this.inscripciones.get(p);
     }
 
-    public boolean inscriptoEnRango(Participante p) {
+  /*  public boolean inscriptoEnRango(Participante p) {
         LocalDate fechaInscripcion = obtenerFechaIncripcion(p);
         return fechaInscripcion != null &&
                 !fechaInscripcion.isBefore(fechaInicio) &&
                 !fechaInscripcion.isAfter(fechaFin);
-    }
+    }*/
 
     public boolean inscriptoDiaUno(Participante p) {
         LocalDate fechaInscripcion = obtenerFechaIncripcion(p);
         return fechaInscripcion != null && fechaInscripcion.isEqual(fechaInicio);
+
     }
 }
