@@ -10,7 +10,7 @@ public class Concurso {
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private List<Participante> participantes;
-    private Map<Participante, LocalDate> inscripciones; // Mapea cada participante con su fecha de inscripción
+    private Map<Participante, LocalDate> inscripciones; //
 
     public Concurso(LocalDate fechaInicio, LocalDate fechaFin) {
         if (fechaInicio.isAfter(fechaFin)) {
@@ -39,22 +39,11 @@ public class Concurso {
 
     }
 
-    /*public boolean estaIncripto(Participante p) {
-
-        return this.participantes.contains(p);
-    }*/
-
     public LocalDate obtenerFechaIncripcion(Participante p) {
 
         return this.inscripciones.get(p);
     }
 
-  /*  public boolean inscriptoEnRango(Participante p) {
-        LocalDate fechaInscripcion = obtenerFechaIncripcion(p);
-        return fechaInscripcion != null &&
-                !fechaInscripcion.isBefore(fechaInicio) &&
-                !fechaInscripcion.isAfter(fechaFin);
-    }*/
 
     public boolean inscriptoDiaUno(Participante p) {
         LocalDate fechaInscripcion = obtenerFechaIncripcion(p);

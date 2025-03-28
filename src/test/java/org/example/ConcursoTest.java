@@ -20,10 +20,6 @@ class ConcursoTest {
 
         // Verificamos que el mensaje de la excepción sea el esperado
         assertTrue(exception.getMessage().contains("Inscripción fuera del rango permitido."));
-
-        //c.inscribir(p);
-        // assertTrue(c.estaIncripto(p));
-
     }
 
 
@@ -49,12 +45,4 @@ class ConcursoTest {
         assertTrue(exception.getMessage().contains("Inscripción fuera del rango permitido."));
     }
 
-    /*@Test
-    public void inscripcionFueraDeTermino() {
-        Participante p = new Participante(42708536, "Paula Agostinelli");
-        Concurso c = new Concurso(LocalDate.now().plusDays(1), LocalDate.now().plusDays(2));
-        c.inscribir(p);
-        assertTrue(c.inscriptoEnRango(p));
-
-    }*/
 }
